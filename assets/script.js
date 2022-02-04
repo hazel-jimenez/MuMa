@@ -1,3 +1,12 @@
+var srchBtnEL = document.getElementById("srch-btn");
+var searchInputEl = document.getElementById("search-input");
+
+srchBtnEL.addEventListener("click", clickMe);
+function clickMe() {
+	
+}
+
+
 fetch("https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limit=10&numberOfTopResults=5", {
 	"method": "GET",
 	"headers": {
@@ -14,4 +23,5 @@ fetch("https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limi
 .catch(err => {
 	console.error(err);
 });
+
 
