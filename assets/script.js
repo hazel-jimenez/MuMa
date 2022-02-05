@@ -1,6 +1,4 @@
-<<<<<<< Updated upstream
-fetch("https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limit=10&numberOfTopResults=5", {
-=======
+
 var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
 var artistBlockEl = document.querySelector("#artist-block");
@@ -27,23 +25,23 @@ console.log(artistName);
 
 
 fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offset=0&limit=10&numberOfTopResults=5`, {
->>>>>>> Stashed changes
+
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "spotify23.p.rapidapi.com",
-		"x-rapidapi-key": "336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d"
+		"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
 	}
 })
 .then(response => {
-<<<<<<< Updated upstream
+
     return response.json() 
-=======
+
 	updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
 	console.log(keyCount)
     return response.json().then(function(data){
 		console.log(data)
 	}) 
->>>>>>> Stashed changes
+
 
 }).then(data => {
     console.log(data)
@@ -56,8 +54,9 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
 	alert("Uable to connect to the API");
 });
 
-<<<<<<< Updated upstream
-=======
+
+
+
 }
 var formSubmitHandler = function(event){
     event.preventDefault();
@@ -103,6 +102,9 @@ function diplayArtistBlock(){
 
 
 srchBtnEL.addEventListener("click", formSubmitHandler);
+
+
+}
 
 
 //hamzahs API key code 
@@ -243,4 +245,5 @@ function fetchAPI2() {
 //Your API Call
 // spotifyApi()
 
->>>>>>> Stashed changes
+
+
