@@ -31,33 +31,25 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
 		"x-rapidapi-host": "spotify23.p.rapidapi.com",
 		"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
 	}
-})
+})    
+
 .then(response => {
 
-    return response.json() 
-
-	updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
+    updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
 	console.log(keyCount)
-    return response.json().then(function(data){
+     response.json().then(function(data){
 		console.log(data)
-	}) 
+    	
 
-
-}).then(data => {
-    console.log(data)
-
-	diplayArtistBlock(data);
-
-
-})
-.catch(function(error){
-	alert("Uable to connect to the API");
+	displayArtistBlock(data);
 });
-
-
-
-
 }
+).catch(function(error){
+	alert("Unable to connect to the API");
+});
+}
+
+
 var formSubmitHandler = function(event){
     event.preventDefault();
     var artistSearch= searchInputEl.value.trim()
@@ -76,20 +68,22 @@ console.log(artistSearch)
      
 };
 
-function diplayArtistBlock(){
+function displayArtistBlock(data){
 	artistBlockEl.textContent="";
 	var searchResults=document.createElement("div")
 	searchResults.classList="search-results"
 
 	var artistName= document.createElement("h3");
-	artistName.textContent= (data.artist.items[0].data.profile.name);
+	console.log(data.artists.items[0])
+	artistName.textContent= data.artists.items[0].data.profile.name;
 
 	var artistImgEl=document.createElement("img");
-	artistImgEl= (data.user.items[0].data.img.smallImageUrl)
+	artistImgEl.src= data.users.items[0].data.image.smallImageUrl;
+	console.log(artistImgEl)
 
 	 for(var i=0; i < 10; i++){
 		var coverArtEl= document.createElement("img");
-		coverArtEl.src = (data.albums.items[i].data.coverArt.sources[0].url)
+		coverArtEl.src = data.albums.items[i].data.coverArt.sources[0].url;
 
 		searchResults.appendChild(coverArtEl);
 		
@@ -104,7 +98,7 @@ function diplayArtistBlock(){
 srchBtnEL.addEventListener("click", formSubmitHandler);
 
 
-}
+
 
 
 //hamzahs API key code 
