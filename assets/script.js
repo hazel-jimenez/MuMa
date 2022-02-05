@@ -6,16 +6,30 @@ function clickMe() {
 	
 }
 
+function spotifyApi() {
+	const secretKey = 'mumaKeySpotify' //Enter a unique string for each fetch that usees a different set of keys
+    const keys = ['336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d']; //Your actual API Key at each index for each amount of keys
+    const maxCalls = 100 //someInteger of Max calls for API
+    const expirationHours = 24
+    const keyCount = localKeyCount(keys.length, maxCalls, expirationHours, secretKey) //initializes keyCount with localStorage keyCount object
+
+    if (pickBestKey(keyCount) == -1) {
+        return console.log('Out of key calls. Clear local storage to end this message.')
+    }
+
+    let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${keys[pickBestKey(keyCount)]}` //picks best key from array of keys based on highest remaining calls
 
 
 fetch("https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limit=10&numberOfTopResults=5", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "spotify23.p.rapidapi.com",
-		"x-rapidapi-key": "336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d"
+		"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
 	}
 })
 .then(response => {
+	updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
+	console.log(keyCount)
     return response.json() 
 
 }).then(data => {
@@ -25,6 +39,7 @@ fetch("https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limi
 	console.error(err);
 });
 
+}
 
 //hamzahs API key code 
 
@@ -162,5 +177,5 @@ function fetchAPI2() {
 };
 
 //Your API Call
-fetchAPI()
-fetchAPI2()
+// spotifyApi()
+
