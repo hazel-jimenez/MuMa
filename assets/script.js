@@ -3,10 +3,49 @@ var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
 var artistBlockEl = document.querySelector("#artist-block");
 
-function clickMe() {
-	
-}
 
+// Api function that calls the news
+function musicNewsApi() {
+	
+		const secretKey = 'mumaKeyNews' //Enter a unique string for each fetch that usees a different set of keys
+		const keys = ['4df9de0ba0msh15d940754aa44e0p19aa82jsn9517ca64824b']; //Your actual API Key at each index for each amount of keys
+		const maxCalls = 100 //someInteger of Max calls for API
+		const expirationHours = 24
+		const keyCount = localKeyCount(keys.length, maxCalls, expirationHours, secretKey) //initializes keyCount with localStorage keyCount object
+	
+		if (pickBestKey(keyCount) == -1) {
+			return console.log('Out of key calls. Clear local storage to end this message.')
+		}
+	
+		let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${keys[pickBestKey(keyCount)]}` //picks best key from array of keys based on highest remaining calls
+	
+	// calling the API using multiple keys
+	fetch("https://music-news-api.p.rapidapi.com/news/nytimes", {
+	
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "music-news-api.p.rapidapi.com",
+			"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
+		}
+	})    
+	
+	.then(response => {
+	
+		updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
+		console.log(keyCount)
+		 response.json().then(function(news){
+			console.log(news)
+			
+	
+		
+	});
+	}
+	).catch(function(error){
+		alert("Unable to connect to News API");
+	});
+	}
+
+//API function calling spotify information for search bar
 function spotifyApi() {
 var artistName= searchInputEl.value.trim()
 console.log(artistName);
@@ -23,7 +62,7 @@ console.log(artistName);
 
     let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${keys[pickBestKey(keyCount)]}` //picks best key from array of keys based on highest remaining calls
 
-
+//calling the API using mutiple keys
 fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offset=0&limit=10&numberOfTopResults=5`, {
 
 	"method": "GET",
@@ -40,7 +79,7 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
      response.json().then(function(data){
 		console.log(data)
     	
-
+//sending data to diaplay function to display information
 	displayArtistBlock(data);
 });
 }
@@ -49,7 +88,7 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
 });
 }
 
-
+//MuMa button function to search Artist
 var formSubmitHandler = function(event){
     event.preventDefault();
     var artistSearch= searchInputEl.value.trim()
@@ -67,7 +106,7 @@ console.log(artistSearch)
      console.log(event);
      
 };
-
+// Displays Artist,Picture,and Albums
 function displayArtistBlock(data){
 	artistBlockEl.textContent="";
 	var searchResults=document.createElement("div")
@@ -101,7 +140,7 @@ srchBtnEL.addEventListener("click", formSubmitHandler);
 
 
 
-//hamzahs API key code 
+// //hamzahs API key code 
 
 
 //initializes localStorage with keyCount
