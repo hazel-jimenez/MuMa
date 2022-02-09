@@ -52,7 +52,7 @@ var artistName= searchInputEl.value.trim()
 console.log(artistName);
 
 	const secretKey = 'mumaKeySpotify' //Enter a unique string for each fetch that usees a different set of keys
-    const keys = ['336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d','4df9de0ba0msh15d940754aa44e0p19aa82jsn9517ca64824b','cecd3c5aa0mshbeb36b25441b59fp19a4d5jsne893d85ca06c','32633583a2msh6023211a7ca5fc3p11b52fjsnbe86d190dff9']; //Your actual API Key at each index for each amount of keys
+    const keys = ['336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d','4df9de0ba0msh15d940754aa44e0p19aa82jsn9517ca64824b','32633583a2msh6023211a7ca5fc3p11b52fjsnbe86d190dff9']; //Your actual API Key at each index for each amount of keys
     const maxCalls = 100 //someInteger of Max calls for API
     const expirationHours = 24
     const keyCount = localKeyCount(keys.length, maxCalls, expirationHours, secretKey) //initializes keyCount with localStorage keyCount object
@@ -84,7 +84,9 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
 		console.log(data)
     	
 //sending data to diaplay function to display information
-	displayArtistBlock(data);
+	
+displayArtistBlock(data);
+
 
 });
 }
@@ -119,13 +121,23 @@ function displayArtistBlock(data){
 	var searchResults=document.createElement("div")
 	searchResults.classList="search-results"
 
+    var trackBlockEl= document.createElement("div")
+    trackBlockEl.classList= "track-block"
+
 	var artistName= document.createElement("h3");
-	console.log(data.artists.items[0])
+
 	artistName.textContent= data.artists.items[0].data.profile.name;
 
 	var artistImgEl=document.createElement("img");
-	artistImgEl.src= data.users.items[0].data.image.smallImageUrl;
-	console.log(artistImgEl)
+	artistImgEl.src= data.users.items[0].data.image.largeImageUrl;
+
+
+    for(var i=0; i < 5; i++){
+		var trackListEl= document.createElement("p");
+		trackListEl.textContent = data.tracks.items[i].data.name;
+
+        trackBlockEl.appendChild(trackListEl);
+    }
 
 	 for(var i=0; i < 5; i++){
 		var coverArtEl= document.createElement("img");
@@ -136,6 +148,7 @@ function displayArtistBlock(data){
 	 }
 	 artistBlockEl.appendChild(artistName);
 	 artistBlockEl.appendChild(artistImgEl);
+     artistBlockEl.appendChild(trackBlockEl);
 	 artistBlockEl.appendChild(searchResults);
 
 }
@@ -145,6 +158,10 @@ function displayNewsBlock(news){
     console.log(news)
     
 }
+
+
+
+
 
 
 
@@ -271,7 +288,3 @@ function fetchAPI() {
 
 
 
-//Your API Call
-// spotifyApi()
-
-  
