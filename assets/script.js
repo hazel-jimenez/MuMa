@@ -1,55 +1,151 @@
+
 var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
+var artistBlockEl = document.querySelector("#artist-block");
 
-srchBtnEL.addEventListener("click", clickMe);
-function clickMe() {}
 
+
+// Api function that calls the news
+function musicNewsApi() {
+	
+		const secretKey = 'mumaKeyNews' //Enter a unique string for each fetch that usees a different set of keys
+		const keys = ['4df9de0ba0msh15d940754aa44e0p19aa82jsn9517ca64824b']; //Your actual API Key at each index for each amount of keys
+		const maxCalls = 100 //someInteger of Max calls for API
+		const expirationHours = 24
+		const keyCount = localKeyCount(keys.length, maxCalls, expirationHours, secretKey) //initializes keyCount with localStorage keyCount object
+	
+		if (pickBestKey(keyCount) == -1) {
+			return console.log('Out of key calls. Clear local storage to end this message.')
+		}
+	
+		let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${keys[pickBestKey(keyCount)]}` //picks best key from array of keys based on highest remaining calls
+	
+	// calling the API using multiple keys
+	fetch("https://music-news-api.p.rapidapi.com/news/nytimes", {
+	
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "music-news-api.p.rapidapi.com",
+			"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
+		}
+	})    
+	
+	.then(response => {
+	
+		updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
+		console.log(keyCount)
+		 response.json().then(function(news){
+			console.log(news)
+			
+	
+		
+	});
+	}
+	).catch(function(error){
+		alert("Unable to connect to News API");
+	});
+	}
+
+
+//API function calling spotify information for search bar
 function spotifyApi() {
-  const secretKey = "mumaKeySpotify"; //Enter a unique string for each fetch that usees a different set of keys
-  const keys = ["336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d"]; //Your actual API Key at each index for each amount of keys
-  const maxCalls = 100; //someInteger of Max calls for API
-  const expirationHours = 24;
-  const keyCount = localKeyCount(
-    keys.length,
-    maxCalls,
-    expirationHours,
-    secretKey
-  ); //initializes keyCount with localStorage keyCount object
 
-  if (pickBestKey(keyCount) == -1) {
-    return console.log(
-      "Out of key calls. Clear local storage to end this message."
-    );
-  }
+var artistName= searchInputEl.value.trim()
+console.log(artistName);
 
-  let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${
-    keys[pickBestKey(keyCount)]
-  }`; //picks best key from array of keys based on highest remaining calls
+	const secretKey = 'mumaKeySpotify' //Enter a unique string for each fetch that usees a different set of keys
+    const keys = ['336db5670cmshe924e8d60e474d5p15ce38jsnff37f2a4c07d','4df9de0ba0msh15d940754aa44e0p19aa82jsn9517ca64824b','cecd3c5aa0mshbeb36b25441b59fp19a4d5jsne893d85ca06c','32633583a2msh6023211a7ca5fc3p11b52fjsnbe86d190dff9']; //Your actual API Key at each index for each amount of keys
+    const maxCalls = 100 //someInteger of Max calls for API
+    const expirationHours = 24
+    const keyCount = localKeyCount(keys.length, maxCalls, expirationHours, secretKey) //initializes keyCount with localStorage keyCount object
 
-  fetch(
-    "https://spotify23.p.rapidapi.com/search/?q=adele&type=multi&offset=0&limit=10&numberOfTopResults=5",
-    {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "spotify23.p.rapidapi.com",
-        "x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`,
-      },
+    if (pickBestKey(keyCount) == -1) {
+        return console.log('Out of key calls. Clear local storage to end this message.')
     }
-  )
-    .then((response) => {
-      updateKeyCount(pickBestKey(keyCount), keyCount, secretKey);
-      console.log(keyCount);
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+
+    let apiURL = `https://testURL.com/coding/is/fun/?q=answerKey&apiKey=${keys[pickBestKey(keyCount)]}` //picks best key from array of keys based on highest remaining calls
+
+//calling the API using mutiple keys
+fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offset=0&limit=10&numberOfTopResults=5`, {
+
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "spotify23.p.rapidapi.com",
+		"x-rapidapi-key": `${keys[pickBestKey(keyCount)]}`
+	}
+})    
+
+.then(response => {
+
+    updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
+	console.log(keyCount)
+     response.json().then(function(data){
+		console.log(data)
+    	
+//sending data to diaplay function to display information
+	displayArtistBlock(data);
+});
+}
+).catch(function(error){
+	alert("Unable to connect to the API");
+});
 }
 
-//hamzahs API key code
+//MuMa button function to search Artist
+var formSubmitHandler = function(event){
+    event.preventDefault();
+    var artistSearch= searchInputEl.value.trim()
+    ;
+    localStorage.setItem("artistSearch",artistSearch);
+   
+console.log(artistSearch)
+    if(artistSearch){
+        spotifyApi();
+       
+     }
+     else{
+         alert("Please Enter an Artist");
+     }
+     console.log(event);
+     
+};
+// Displays Artist,Picture,and Albums
+function displayArtistBlock(data){
+	artistBlockEl.textContent="";
+	var searchResults=document.createElement("div")
+	searchResults.classList="search-results"
+
+	var artistName= document.createElement("h3");
+	console.log(data.artists.items[0])
+	artistName.textContent= data.artists.items[0].data.profile.name;
+
+	var artistImgEl=document.createElement("img");
+	artistImgEl.src= data.users.items[0].data.image.smallImageUrl;
+	console.log(artistImgEl)
+
+	 for(var i=0; i < 10; i++){
+		var coverArtEl= document.createElement("img");
+		coverArtEl.src = data.albums.items[i].data.coverArt.sources[0].url;
+
+		searchResults.appendChild(coverArtEl);
+		
+	 }
+	 artistBlockEl.appendChild(artistName);
+	 artistBlockEl.appendChild(artistImgEl);
+	 artistBlockEl.appendChild(searchResults);
+
+}
+
+
+srchBtnEL.addEventListener("click", formSubmitHandler);
+
+
+
+
+
+// //hamzahs API key code 
+
+
 
 //initializes localStorage with keyCount
 function localKeyCount(keyLength, calls, expirationHours, secretKey) {
@@ -213,3 +309,4 @@ function fetchAPI2() {
 
 //Your API Call
 // spotifyApi()
+
