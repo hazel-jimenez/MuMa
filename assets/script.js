@@ -119,6 +119,7 @@ console.log(artistSearch)
 function displayArtistBlock(data){
 	artistBlockEl.textContent="";
 	var searchResults=document.createElement("div")
+  //album covers class list
 	searchResults.classList="search-results"
 
     var trackBlockEl= document.createElement("div")
