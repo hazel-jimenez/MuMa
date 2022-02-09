@@ -35,7 +35,7 @@ function musicNewsApi() {
 		console.log(keyCount)
 		 response.json().then(function(news){
 			console.log(news)
-			
+			displayNewsBlock(news);
 	
 		
 	});
