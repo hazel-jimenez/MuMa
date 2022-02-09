@@ -1,4 +1,3 @@
-
 var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
 var artistBlockEl = document.querySelector("#artist-block");
