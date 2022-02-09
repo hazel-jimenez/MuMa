@@ -123,7 +123,7 @@ function displayArtistBlock(data){
 	artistImgEl.src= data.users.items[0].data.image.smallImageUrl;
 	console.log(artistImgEl)
 
-	 for(var i=0; i < 10; i++){
+	 for(var i=0; i < 5; i++){
 		var coverArtEl= document.createElement("img");
 		coverArtEl.src = data.albums.items[i].data.coverArt.sources[0].url;
 
