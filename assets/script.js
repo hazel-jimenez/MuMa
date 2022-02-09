@@ -2,7 +2,7 @@
 var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
 var artistBlockEl = document.querySelector("#artist-block");
-
+var newsBlockEl = document.querySelector("#news-block");
 
 // Api function that calls the news
 function musicNewsApi() {
@@ -35,7 +35,7 @@ function musicNewsApi() {
 		console.log(keyCount)
 		 response.json().then(function(news){
 			console.log(news)
-			
+			displayNewsBlock(news);
 	
 		
 	});
@@ -156,9 +156,21 @@ function displayArtistBlock(data){
 //display music news
 function displayNewsBlock(news){
     console.log(news)
+    var newsTitle = document.createElement("h3")
+    newsTitle.textContent = news[0].title;
+
+    var newsUrl = document.createElement("p")
+    newsUrl.textContent = news[0].url;
     
+    var newsSource = document.createElement('p');
+    newsSource.textContent = news[0].source;
+
+    newsBlockEl.appendChild(newsTitle);
+    newsBlockEl.appendChild(newsUrl);
+    newsBlockEl.appendChild(newsSource);
 }
 
+musicNewsApi()
 
 
 
