@@ -28,7 +28,7 @@ Alex Campbell
 [@Acampbell8610](https://github.com/Acampbell8610)
 
 Jerome Russell
-[@Romantic](https://github.com/Romantic)
+[@Romeantic](https://github.com/Romeantic)
 
 Santiago Hurtado
 [@bompilori](https://github.com/bompilori)
