@@ -2,6 +2,7 @@ var srchBtnEL = document.getElementById("srch-btn");
 var searchInputEl = document.getElementById("search-input");
 var artistBlockEl = document.querySelector("#artist-block");
 var newsBlockEl = document.querySelector("#news-block");
+var pastSearchEl = document.querySelector("#past-search-btn")
 
 // Api function that calls the news
 function musicNewsApi() {
@@ -46,8 +47,8 @@ function musicNewsApi() {
 
 
 //API function calling spotify information for search bar
-function spotifyApi() {
-var artistName= searchInputEl.value.trim()
+function spotifyApi(artistName) {
+//var artistName= searchInputEl.value.trim()
 console.log(artistName);
 
 	const secretKey = 'mumaKeySpotify' //Enter a unique string for each fetch that usees a different set of keys
@@ -99,13 +100,13 @@ displayArtistBlock(data);
 //MuMa button function to search Artist
 var formSubmitHandler = function(event){
     event.preventDefault();
-    var artistSearch= searchInputEl.value.trim()
+    var artistName= searchInputEl.value.trim()
     ;
-    localStorage.setItem("artistSearch",artistSearch);
-   
-console.log(artistSearch)
-    if(artistSearch){
-        spotifyApi();
+    localStorage.setItem("artistName",artistName);
+    pastSearchBtn()
+console.log(artistName)
+    if(artistName){
+        spotifyApi(artistName);
        
      }
      else{
@@ -170,9 +171,24 @@ function displayNewsBlock(news){
     newsBlockEl.appendChild(newsSource);
 }
 
+
 musicNewsApi()
 
+function pastSearchBtn(){
+    var pastSearch= document.createElement("div");
 
+    var pastArtist= localStorage.getItem("artistName");
+
+    var pastBtn = document.createElement("btn");
+    pastBtn.classlist="past-button"
+    pastBtn.textContent= pastArtist;
+
+    pastSearch.addEventListener("click", function(){spotifyApi(pastArtist)});
+
+    pastSearch.appendChild(pastBtn);
+    pastSearchEl.appendChild(pastSearch);
+
+}
 
 
 
