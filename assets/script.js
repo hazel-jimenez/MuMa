@@ -127,8 +127,7 @@ function displayArtistBlock(data){
     trackBlockEl.classList= "track-block"
 
 	var artistName= document.createElement("h1");
-
-	artistName.textContent= data.artists.items[0].data.profile.name;
+    artistName.textContent= data.artists.items[0].data.profile.name;
 
 	var artistImgEl=document.createElement("img");
 	artistImgEl.src= data.users.items[0].data.image.largeImageUrl;
