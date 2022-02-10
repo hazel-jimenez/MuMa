@@ -107,6 +107,7 @@ var formSubmitHandler = function(event){
 console.log(artistName)
     if(artistName){
         spotifyApi(artistName);
+        searchInputEl.value="";
        
      }
      else{
@@ -125,7 +126,7 @@ function displayArtistBlock(data){
     var trackBlockEl= document.createElement("div")
     trackBlockEl.classList= "track-block"
 
-	var artistName= document.createElement("h3");
+	var artistName= document.createElement("h1");
 
 	artistName.textContent= data.artists.items[0].data.profile.name;
 
@@ -134,7 +135,7 @@ function displayArtistBlock(data){
 
 
     for(var i=0; i < 5; i++){
-		var trackListEl= document.createElement("p");
+		var trackListEl= document.createElement("h3");
 		trackListEl.textContent = data.tracks.items[i].data.name;
 
         trackBlockEl.appendChild(trackListEl);
@@ -160,14 +161,14 @@ function displayNewsBlock(news){
     var newsTitle = document.createElement("h3")
     newsTitle.textContent = news[0].title;
 
-    var newsUrl = document.createElement("p")
-    newsUrl.textContent = news[0].url;
+    // var newsUrl = document.createElement("p")
+    // newsUrl.textContent = news[0].url;
     
     var newsSource = document.createElement('p');
     newsSource.textContent = news[0].source;
 
     newsBlockEl.appendChild(newsTitle);
-    newsBlockEl.appendChild(newsUrl);
+   // newsBlockEl.appendChild(newsUrl);
     newsBlockEl.appendChild(newsSource);
 }
 
@@ -180,7 +181,7 @@ function pastSearchBtn(){
     var pastArtist= localStorage.getItem("artistName");
 
     var pastBtn = document.createElement("btn");
-    pastBtn.classlist="past-button"
+    pastBtn.classlist="past-button waves-effect waves-light btn-small"
     pastBtn.textContent= pastArtist;
 
     pastSearch.addEventListener("click", function(){spotifyApi(pastArtist)});
