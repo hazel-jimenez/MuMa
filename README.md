@@ -1,18 +1,18 @@
 # MuMa: The Music Matching App.
 
+![ScreenShot](assets/MuMa1.0.jpg)
+
 ## User Story
 
 AS A listener
-I WANT to input a genre or artist
-SO THAT I am matched with other similar music.
+I WANT to input artist name
+SO THAT we can see their top 5 albums and songs and daily music news
+
 
 ## Description
 
-A site that allows you to search by genre or artist to find similar music choices and sends you to their YouTube or iTunes.
+A site that allows you to search artist and see their top 5 songs and albums and a daily music news.
 
-## Getting Started
-
-You just type in URL and click on the search bar, add artist name or genre and click the seach button. That will lead you to artist albums, songs, and playlists
 
 ## Authors
 
