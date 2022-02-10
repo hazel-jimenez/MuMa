@@ -10,7 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@400;700&family=Staatliches&display=swap"
       rel="stylesheet"
     />
-    <link href="./assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="./assets/style.css"/>
     <title>MuMa</title>
   </head>
 
@@ -18,16 +19,15 @@
     <header class="hero">
       <h1 class="app-title"><i class=""></i>Music Matching App</h1>
       <p>Search for new music!</p>
-
-
     </header>
 
 
 
-<section>
+<section class="card col s12 m12 l3">
       <form id="muma-search">
-      <input type="text" id="search-input" />
-      <button type="submit" id="srch-btn">MuMa</button>
+      <input type="text"  id="search-input" />
+      <button type="submit" id="srch-btn">Search!</button>
+      
       </form>
     </section>
       <section>
@@ -38,20 +38,17 @@
      
 
         <div id="artist-block">
-
         </div>
-
-
+        </section>
       <section>
         <div>
-
+          <button type="submit" id="srch-btn">Music News</button>
         </div>
-
-
       </section>
       <!-- <h1 class="text-3xl font-bold underline">
         Hello world!
       </h1> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/script.js"></script>
   </body>
 </html>
