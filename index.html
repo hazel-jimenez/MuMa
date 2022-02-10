@@ -6,56 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;1,300&family=Raleway:wght@200&display=swap" rel="stylesheet">
+    <!-- <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@400;700&family=Staatliches&display=swap"
+    rel="stylesheet"/> -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@400;700&family=Staatliches&display=swap"
       rel="stylesheet"
-    /> 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link rel="stylesheet" href="./assets/style.css" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+    <link rel="stylesheet" href="./assets/style.css"/>
     <title>MuMa</title>
   </head>
+<!--<body class="flow-text">-->
+  <!-- <div class="col s12 m9" id="artist-block"></div>
+      <div class="col s12 m3 right-align" id="news-block"></div>-->
+  <body class="flow-text">
+    <div class="header-color indigo lighten-4 center">
 
-      <body class="flow-text">
-          <div class="header-color light-blue lighten-1 center">
-          <header class="hero">
-            <h1 class="app-title"><i class=""></i>MuMa: The Music Matching App</h1>
-            <p>Search for new music!</p>
-          </header>
+
+    <header class="hero font-used">
+      <h1 class="app-title"><i class=""></i>MuMa: The Music Matching App</h1>
+      <p>Search for new music!</p>
+    </header>
+  </div>
+
+    <section class="row font-used">
+      <div class="col s12 m3">
+      <form id="muma-search" >
+        <input type="text" id="search-input" />
+        <button type="submit" id="srch-btn">Search!</button>
+      </form>
+      <div id="past-search-btn"></div>
+      </div>
+    </section>
+
+    <section class="row font-used">
+      <div class="col s12 m9 text-center" id="artist-block"></div>
+      <div class="col s12 m3 left-align flow-text boxes" id="news-block"></div>
+    </section>
+    <section>
+      <div>
+        
+      </div>
+    </section>
+    <section>
+      <footer>
+      </div>
+      <div class="footer-copyright indigo lighten-4 center font-used">
+        <div class="container">
+        © 2022 MuMa
         </div>
-
-        <section class="row">
-          <div class="card col s12 m3">
-          <form id="muma-search" >
-            <input type="text" id="search-input" />
-            <button type="submit" id="srch-btn">Search!</button>
-          </form>
-          <div id="past-search-btn"></div>
-          </div>
-        </section>
-
-        <section class="row">
-          <div class="col s12 m9" id="artist-block"></div>
-          <div class="col s12 m3 right-align flow-text" id="news-block"></div>
-        </section>
-        <section>
-          <div>
-            
-          </div>
-        </section>
-        <section>
-          <footer>
-          </div>
-          <div class="footer-copyright light-blue lighten-1 center">
-            <div class="container">
-            © 2022 MuMa
-            </div>
-          </div>
-        </footer>
-      </section>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="./assets/script.js"></script>
-      </body>
+      </div>
+    </footer>
+  </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/script.js"></script>
+  </body>
 </html>

@@ -43,7 +43,7 @@ function musicNewsApi() {
 	).catch(function(error){
 		alert("Unable to connect to News API");
 	});
-	}
+}
 
 
 //API function calling spotify information for search bar
@@ -79,7 +79,7 @@ fetch(`https://spotify23.p.rapidapi.com/search/?q=${artistName}&type=multi&offse
 .then(response => {
 
     updateKeyCount(pickBestKey(keyCount), keyCount, secretKey)
-	console.log(keyCount)
+	console.log(keyCount)// how many times the api is stored
      response.json().then(function(data){
 		console.log(data)
     	
@@ -96,7 +96,7 @@ displayArtistBlock(data);
 }
 
 
-
+// search buttom 
 //MuMa button function to search Artist
 var formSubmitHandler = function(event){
     event.preventDefault();

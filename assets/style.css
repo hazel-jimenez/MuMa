@@ -1,0 +1,31 @@
+body {
+    background-color: rgba(125, 85, 236, 0.705);
+}
+
+.boxes h3 {
+    border: solid 2px;
+    border-color: black;
+    padding: 20px;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+
+#muma-search {
+    width: 20%;
+}
+
+
+.card {
+    width: 250px;
+    height: auto;
+}
+
+
+.font-used {
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+}
