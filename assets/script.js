@@ -126,7 +126,7 @@ function displayArtistBlock(data){
     var trackBlockEl= document.createElement("div")
     trackBlockEl.classList= "track-block"
 
-	var artistName= document.createElement("h3");
+	var artistName= document.createElement("h1");
 
 	artistName.textContent= data.artists.items[0].data.profile.name;
 
@@ -135,7 +135,7 @@ function displayArtistBlock(data){
 
 
     for(var i=0; i < 5; i++){
-		var trackListEl= document.createElement("p");
+		var trackListEl= document.createElement("h3");
 		trackListEl.textContent = data.tracks.items[i].data.name;
 
         trackBlockEl.appendChild(trackListEl);
